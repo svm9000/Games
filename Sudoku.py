@@ -1,5 +1,5 @@
 #*--------------------------------------------------------------------*#
-#* We take a solved Sudoku grid, permutes the rows 	                  *#
+#* We take a solved Sudoku 9 by 9 grid, permutes the rows 	          *#
 #* and column a set number of times then mask a % of cells to reveal  *#
 #* an unsolved Sudoku grid. Note: It has been conjectured that        *#
 #* a standard puzzle need only have 17 clues for the solution to be   *#
@@ -7,6 +7,17 @@
 #*We use OO principles in the code design.                            *#
 #*--------------------------------------------------------------------*#
 #*--------------------------------------------------------------------*#
+#Constraints:
+
+#- 1. The numbers in the squares in any row must be each of 1 to 9
+#- 2. The values in the squares in any column must be each of 1 to 9
+#- 3. The values in the squares in any box must be each of 1 to 9 (a box is one of the 9 non-overlapping 3x3 grids within the overall 9x9 grid)
+#- 4. There must be only one number within any square 
+#- 5. The starting sudoku numbers must be in those same places in the final solution. Naturally 
+#     if we have a lot of missing values in the grid, we would expect a larger number of  
+#     feasible solutions.
+
+
 
 #allows reference to the random class libraries
 import random
@@ -68,7 +79,7 @@ class Sudokugrid:
 
         MCIndex=1
         while (MCIndex<=MC):
-            #choose two random columns that are different
+            #choose two random columns that are different. Since we only want to select random columns within the 3 by 3 block grid  
             rndBox=random.randint(1, 3)
             rndCol1=(rndBox-1)*3+random.randint(1, 3)-1
             rndCol2=(rndBox-1)*3+random.randint(1, 3)-1
@@ -78,7 +89,7 @@ class Sudokugrid:
                 rndCol2=(rndBox-1)*3+random.randint(1, 3)-1
            
 
-            #choose two random rows that are different
+            #choose two random rows that are different. Since we only want to select random rows within the 3 by 3 block grid   
             rndBox=random.randint(1, 3)
             rndRow1=(rndBox-1)*3+random.randint(1, 3)-1
             rndRow2=(rndBox-1)*3+random.randint(1, 3)-1
